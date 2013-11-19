@@ -20,6 +20,8 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL31.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.EXTTextureFilterAnisotropic.*;
+import m11070051.blatt5.Main;
+import m11070051.blatt5.Monkey;
 import math.Mat4;
 import math.Vec3;
 
@@ -126,9 +128,9 @@ public class Sandbox
 
 			Vec3 crossProduct = Vec3.cross(aSubC, bSubC);
 			
+			crossProduct = Vec3.normalize(crossProduct);
 			
-			
-				
+							
 			if (crossProduct.x<0) crossProduct.x = crossProduct.x *-1; 
 			if (crossProduct.y<0) crossProduct.y = crossProduct.y *-1; 
 			if (crossProduct.z<0) crossProduct.z = crossProduct.z *-1; 
@@ -146,7 +148,7 @@ public class Sandbox
 			if (crossProduct.z>1) crossProduct.z = crossProduct.z /crossProduct.z; 
 			
 			System.out.println(crossProduct);
-			shaderProgram.setUniform( "uColor",    new Vec3(.5f+crossProduct.x, .5f+crossProduct.y, .2f+crossProduct.z)   );
+			shaderProgram.setUniform( "uColor",    new Vec3(crossProduct.x, crossProduct.y, crossProduct.z)   );
 			triangleMesh.drawRange(GL_TRIANGLES, i, 3);
 		}
 		
